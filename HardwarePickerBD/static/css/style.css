@@ -1,0 +1,541 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables for Lighter Colors */
+:root {
+    --gold: #FFD700;
+    --gold-dark: #FFA500;
+    --coral: #FF7F50;
+    --coral-dark: #FF6347;
+    --violet: #8b5cf6;
+    --blue: #60a5fa;
+}
+
+
+/* Fix 1: Header Top Bar Button Styling - Register and Login buttons */
+.bg-dark .btn-sm {
+    padding: 6px 16px !important;
+    font-size: 0.875rem !important;
+    border-width: 1px !important;
+    border-radius: 6px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+}
+
+.bg-dark .btn-outline-light {
+    border: 1px solid rgba(255,255,255,0.8) !important;
+    color: #fff !important;
+    background-color: transparent !important;
+}
+
+.bg-dark .btn-outline-light:hover {
+    background-color: rgba(255,255,255,0.15) !important;
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
+.bg-dark .btn-light {
+    background-color: #f8f9fa !important;
+    border: 1px solid #f8f9fa !important;
+    color: #212529 !important;
+}
+
+.bg-dark .btn-light:hover {
+    background-color: #e2e6ea !important;
+    border-color: #dae0e5 !important;
+    color: #212529 !important;
+}
+
+.bg-dark .me-2 {
+    margin-right: 8px !important;
+}
+
+
+/* Navbar Button Styling */
+.navbar .btn {
+    padding: 8px 20px !important;
+    margin: 0 5px !important;
+    border-width: 2px !important;
+    border-radius: 8px !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-outline-light {
+    border: 2px solid rgba(255,255,255,0.8) !important;
+    color: #fff !important;
+}
+
+.navbar .btn-outline-light:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
+.navbar .btn-primary {
+    background-color: rgba(255,255,255,0.2) !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
+
+.navbar .btn-primary:hover {
+    background-color: #fff !important;
+    color: #8b5cf6 !important;
+}
+
+
+/* Navbar styling - Lighter */
+.navbar {
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 12px 0 !important;
+}
+
+.nav-item a {
+    color: #ffffff !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 15px !important;
+}
+
+.nav-item a:hover {
+    transform: translateY(-2px);
+    text-shadow: 0 2px 8px rgba(255,255,255,0.3);
+}
+
+
+/* Hero Section - Lighter Gradient */
+.hero-section {
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+    min-height: 32vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.4;
+}
+
+.build {
+    text-align: center;
+    padding: 20px 0 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-weight: 700;
+    color: #fff;
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-description {
+    color: rgba(255,255,255,0.95);
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.btn-gradient-custom {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: #1a1a2e;
+    font-weight: 600;
+    border: none;
+    padding: 9px 28px;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    box-shadow: 0 6px 16px rgba(255,215,0,0.35);
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.btn-gradient-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255,215,0,0.45);
+    background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+    color: #1a1a2e;
+}
+
+
+/* Guide Section - Lighter Overlay */
+.guides-section {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+}
+
+.guide {
+    background: rgba(255,255,255,0.08);
+    padding: 60px 45px;
+    margin: 20px 15px 0;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255,215,0,0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,127,80,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.guide h1 {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.guide p {
+    color: rgba(255,255,255,0.95) !important;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.guide i {
+    color: #ffffff !important;
+}
+
+.btn-outline-light {
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.btn-outline-light:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: #1a1a2e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255,215,0,0.3);
+}
+
+.guide-card {
+    border-radius: 15px !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #fafbfc, #f0f1f3);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.guide-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
+
+/* Guide Card Icons - Lighter purple */
+.guide-card i,
+.guide-card .bi,
+.guide-card .fa,
+.guide-card .fas,
+.guide-card .far {
+    color: #8b5cf6 !important;
+}
+
+.guide-card .card-title {
+    color: #374151 !important;
+}
+
+.guide-card .card-text {
+    color: #6b7280 !important;
+}
+
+.component-info {
+    background: rgba(255,215,0,0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.component-info i {
+    color: #8b5cf6 !important;
+}
+
+
+/* Blog Section - Lighter gradient */
+.blog-section {
+    margin: 0 !important;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+}
+
+/* Remove any background from container */
+.blog-section .container {
+    background: transparent !important;
+    padding: 0 15px !important;
+}
+
+/* Ensure row uses Bootstrap defaults */
+.blog-section .row {
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+}
+
+/* Force white color for section headings and descriptions only */
+.blog-section > .container > .row > .col-md-3 h1,
+.blog-section > .container > .row > .col-md-3 h2,
+.blog-section > .container > .row > .col-md-3 p {
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background-clip: unset !important;
+    -webkit-background-clip: unset !important;
+}
+
+.blog-section > .container > .row > .col-md-3 h1 {
+    font-weight: 700;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.blog-section > .container > .row > .col-md-3 p {
+    opacity: 0.95;
+}
+
+.blog-section > .container > .row > .col-md-3 i,
+.blog-section > .container > .row > .col-md-3 .bi,
+.blog-section > .container > .row > .col-md-3 .fa,
+.blog-section > .container > .row > .col-md-3 .fas,
+.blog-section > .container > .row > .col-md-3 .far {
+    color: #ffffff !important;
+}
+
+.btn-gradient-secondary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: #1a1a2e;
+    font-weight: 600;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    box-shadow: 0 6px 16px rgba(255,215,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-gradient-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+    background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+    color: #1a1a2e;
+}
+
+/* Blog Cards - Lighter background */
+.blog-card {
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    background: linear-gradient(145deg, #fafbfc, #f0f1f3);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
+
+/* Card content text - softer colors */
+.blog-card .card-title {
+    color: #374151 !important;
+    font-weight: 700;
+}
+
+.blog-card .card-body p,
+.blog-card .card-body .small,
+.blog-card .card-text {
+    color: #6b7280 !important;
+}
+
+.blog-card .text-muted {
+    color: #9ca3af !important;
+}
+
+/* Blog Card Icons - Lighter purple */
+.blog-card i,
+.blog-card .bi,
+.blog-card .fa,
+.blog-card .fas,
+.blog-card .far,
+.blog-card .fa-regular,
+.blog-card .fa-solid {
+    color: #8b5cf6 !important;
+}
+
+/* Button icons inside cards */
+.blog-card .btn i,
+.blog-card .btn .bi,
+.blog-card .btn .fa,
+.blog-card .btn .fas {
+    color: #8b5cf6 !important;
+}
+
+.blog-card .card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.top-pick-badge {
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    border-radius: 50px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    background: linear-gradient(to right, var(--gold), var(--gold-dark));
+    color: #1a1a2e;
+    animation: pulse 2s infinite;
+}
+
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Card hover effects */
+.card {
+    transition: all 0.3s ease;
+}
+
+.badge {
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.btn-outline-primary {
+    border: 2px solid #8b5cf6;
+    color: #8b5cf6;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+    border-color: #8b5cf6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(139,92,246,0.25);
+}
+
+
+/* Carousel controls with Gold Accent */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--gold);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+
+/* Footer styling */
+.foot {
+    background: linear-gradient(135deg, #191b2a 0%, #2c2f47 100%);
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+}
+
+.details {
+    margin-top: 20px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.name h6 {
+    color: white;
+}
+
+.lastpart {
+    background: linear-gradient(135deg, #191b2a 0%, #2c2f47 100%);
+}
+
+.pro h6 {
+    color: white;
+}
+
+.copy {
+    font-size: 12px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .guide h1,
+    .blog-section h1 {
+        font-size: 2rem;
+    }
+    
+    .build {
+        padding: 15px 0 12px;
+    }
+    
+    .hero-section {
+        min-height: 28vh;
+    }
+    
+    .guide {
+        margin: 10px;
+        padding: 30px 20px;
+    }
+}

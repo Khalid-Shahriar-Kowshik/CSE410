@@ -1,0 +1,130 @@
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#<div class="container mt-5">#}
+{#      <!-- Header -->#}
+{#      <header class="text-center mb-4">#}
+{#        <h1 class="bg-primary text-white py-3 rounded">Choose Your Parts</h1>#}
+{#      </header>#}
+{#      <!-- Top Bar -->#}
+{#      <div class="row align-items-center mb-4">#}
+{#        <div class="col-md-6 mb-2 mb-md-0">#}
+{#          <input type="text" class="form-control" placeholder="https://pcpartpicker.com/list/">#}
+{#        </div>#}
+{#        <div class="col-md-3 mb-2 mb-md-0">#}
+{#          <button class="btn btn-success w-100">Compatibility: No issues or incompatibilities found.</button>#}
+{#        </div>#}
+{#        #}
+{#      </div>#}
+{#      <!-- Parts Table -->#}
+{#      <table class="table table-bordered">#}
+{#        <thead class="table-light">#}
+{#          <tr>#}
+{#            <th>Component</th>#}
+{#            <th>Selection</th>#}
+{#            <th>Base</th>#}
+{#            <th>Promo</th>#}
+{#            <th>Shipping</th>#}
+{#            <th>Tax</th>#}
+{#            <th>Price</th>#}
+{#          </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#          <tr>#}
+{#            <td>CPU</td>#}
+{#            <td>#}
+{#             <a href="{% url 'cpu' %}" class="btn btn-primary m-2">View CPUs</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>CPU Cooler</td>#}
+{#            <td>#}
+{#              <a href="{% url 'cpucooler' %}" class="btn btn-primary m-2">View CPU Coolers</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>Motherboard</td>#}
+{#            <td>#}
+{#              <a href="{% url 'mobo' %}" class="btn btn-primary m-2">View Motherboards</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>Memory</td>#}
+{#            <td>#}
+{#              <a href="{% url 'ram' %}" class="btn btn-primary m-2">View Rams</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>Storage</td>#}
+{#            <td>#}
+{#              <a href="{% url 'storage' %}" class="btn btn-primary m-2">View Storage Units</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>GPU</td>#}
+{#            <td>#}
+{#              <a href="{% url 'gpu' %}" class="btn btn-primary m-2">View GPUs</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>PSU</td>#}
+{#            <td>#}
+{#              <a href="{% url 'psu' %}" class="btn btn-primary m-2">View PSUs</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td>Case</td>#}
+{#            <td>#}
+{#              <a href="{% url 'case' %}" class="btn btn-primary m-2">View Cases</a>#}
+{#            </td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#          </tr>#}
+{#          <!-- Add additional components -->#}
+{#        </tbody>#}
+{#      </table>#}
+{#      <!-- Footer -->#}
+{#      <footer class="text-center mt-4">#}
+{#        <p class="text-muted">* PCPartPicker may receive compensation for purchases...</p>#}
+{#      </footer>#}
+{#    </div>#}
+{#    <!-- Bootstrap Bundle with Popper -->#}
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>#}
+{#{% endblock %}#}

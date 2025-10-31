@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Search results for "{{ query }}"</h3>
+    <hr>
+    {% if query and results %}
+        <div class="list-group">
+            {% for post in results %}
+                <!-- CORRECTED: Changed 'blog_detail' to 'blog_details' -->
+                <a href="{% url 'blog_details' post.id %}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ post.title }}</h5>
+                        <small class="text-muted">{{ post.created|date:"F d, Y" }}</small>
+                    </div>
+                    <p class="mb-1">{{ post.content|truncatewords:30 }}</p>
+                    <small class="text-muted">By {{ post.author.username }}</small>
+                </a>
+            {% endfor %}
+        </div>
+    {% elif query and not results %}
+        <div class="alert alert-warning" role="alert">
+            No blog posts found matching your search for "{{ query }}".
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Please enter a search term to find blog posts.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

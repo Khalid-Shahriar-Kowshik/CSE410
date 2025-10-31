@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="product-detail-wrapper" style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); padding: 40px 0 0 0;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px 40px 20px;">
+        
+        <!-- Product Title Card -->
+        <div class="card border-0 shadow-lg mb-4" style="border-radius: 15px; background: rgba(255,255,255,0.95);">
+            <div class="card-body p-4 text-center">
+                <h1 style="margin: 0; color: #374151; font-weight: 700; font-size: 2rem;">{{ object.name }}</h1>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; align-items: flex-start;">
+            <!-- Image and Purchase Section -->
+            <div style="flex: 1 1 400px; min-width: 300px; max-width: 600px;">
+                <!-- Image Card -->
+                {% if object.photo %}
+                <div class="card border-0 shadow-lg mb-4" style="border-radius: 15px; background: linear-gradient(145deg, #fafbfc, #f0f1f3); overflow: hidden;">
+                    <div style="position: relative; padding-top: 75%;">
+                        <img src="{{ object.photo.url }}" alt="{{ object.name }}" 
+                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; padding: 20px;">
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Price and Add to Cart Card -->
+                <div class="card border-0 shadow-lg" style="border-radius: 15px; background: linear-gradient(145deg, #fafbfc, #f0f1f3);">
+                    <div class="card-body p-4 text-center">
+                        {% if object.price %}
+                        <div class="price-display mb-3">
+                            <h2 style="color: #8b5cf6; font-size: 2.5rem; margin: 0; font-weight: 700;">
+                                ৳{{ object.price }}
+                            </h2>
+                        </div>
+                        {% endif %}
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'add_to_cart' object.product_type object.id %}" 
+                               class="btn btn-primary btn-lg" 
+                               style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); border: none; font-weight: 600; padding: 12px;">
+                                <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specifications Section -->
+            <div style="flex: 2 1 600px; min-width: 300px;">
+                <div class="card border-0 shadow-lg" style="border-radius: 15px; background: linear-gradient(145deg, #fafbfc, #f0f1f3);">
+                    <div class="card-header text-white py-3" style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700;">
+                            <i class="bi bi-list-ul me-2"></i>Specifications
+                        </h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            {% for field_name, value in object.get_field_values %}
+                            <div class="spec-item">
+                                <span class="spec-label">{{ field_name }}</span>
+                                <span class="spec-value">
+                                    {% if field_name == 'Connector And Ports' %}
+                                        <div style="text-align: left;">
+                                            {{ value|linebreaks }}
+                                        </div>
+                                    {% elif 'clock' in field_name.lower or 'speed' in field_name.lower %}
+                                        {{ value }} GHz
+                                    {% elif 'capacity' in field_name.lower or 'storage' in field_name.lower %}
+                                        {{ value }} GB
+                                    {% elif 'power' in field_name.lower or 'wattage' in field_name.lower %}
+                                        {{ value }} W
+                                    {% else %}
+                                        {{ value }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="javascript:history.back()" class="btn btn-outline-light btn-lg" 
+               style="padding: 12px 40px; font-weight: 600; border: 2px solid rgba(255,255,255,0.9); color: white; border-radius: 50px;">
+                <i class="bi bi-arrow-left me-2"></i>Back to Products
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .spec-item {
+        padding: 16px;
+        background: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+
+    .spec-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 12px rgba(139,92,246,0.15);
+        border-color: #8b5cf6;
+    }
+
+    .spec-label {
+        font-weight: 700;
+        color: #374151;
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .spec-value {
+        color: #6b7280;
+        text-align: left;
+        word-break: break-word;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(139,92,246,0.4);
+    }
+
+    .btn-outline-light:hover {
+        background-color: rgba(255,255,255,0.2);
+        border-color: white;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 768px) {
+        .product-detail-wrapper {
+            padding: 20px 0 0 0 !important;
+        }
+
+        .container {
+            padding: 0 16px 20px 16px !important;
+        }
+        
+        .card-body.p-4 {
+            padding: 20px !important;
+        }
+
+        .spec-item {
+            padding: 12px;
+        }
+
+        .spec-label {
+            font-size: 0.9rem;
+        }
+
+        .spec-value {
+            font-size: 0.85rem;
+        }
+
+        h1 {
+            font-size: 1.5rem !important;
+        }
+
+        .price-display h2 {
+            font-size: 2rem !important;
+        }
+    }
+</style>
+{% endblock %}

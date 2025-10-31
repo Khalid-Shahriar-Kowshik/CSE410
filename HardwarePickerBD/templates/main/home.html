@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- build part start here -->
+<section class="hero-section">
+  <div class="container">
+    <div class="build text-center py-5">
+      <div class="mb-3">
+        <i class="bi bi-pc-display" style="font-size: 3.5rem; color: #fff;"></i>
+      </div>
+      <h1 class="hero-title">Pick Parts. Build Your PC. <br> Compare and Share.</h1>
+      <p class="hero-description">We provide part selection, pricing, and compatibility guidance for <br> do-it-yourself computer builders.</p>
+      <a href="{% url 'cpu' %}" class="btn btn-lg btn-gradient-custom">
+        <i class="bi bi-rocket-takeoff me-2"></i>Start Your Build
+      </a>
+    </div>
+  </div>
+</section>
+<!-- build part end here -->
+
+
+<!-- guides part start here -->
+<section class="guides-section">
+<div class="guide">
+  <div class="container">
+    <div class="row gx-4">
+      <!-- Left Text Section -->
+      <div class="col-md-3 mb-4">
+        <div class="mb-3">
+          <i class="fa-solid fa-handshake-angle" style="font-size: 2.5rem; color: #fff;"></i>
+        </div>
+        <h1 style="color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Build Guides</h1>
+        <p style="color: rgba(255,255,255,0.95); line-height: 1.8;">
+          Building your own PC and need ideas on where to get started?
+          Explore our build guides which cover systems for a variety of use-cases and budgets.
+        </p>
+        <a href="{% url 'guide_list' %}" class="btn btn-outline-light btn-lg shadow-sm">
+          <i class="bi bi-arrow-right-circle me-2"></i>View In Details
+        </a>
+      </div>
+
+
+      <!-- Right Carousel Section -->
+      <div class="col-md-9">
+        <div id="guidesCarousel" class="carousel slide" data-bs-ride="carousel">
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            {% for guide in guides %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <div class="card guide-card h-100 mb-3 border-0 shadow-lg">
+                      {% if guide.image %}
+                        <img
+                          src="{{ guide.image.url }}"
+                          class="card-img-top"
+                          alt="{{ guide.title }}"
+                          style="max-height:200px; object-fit:cover; border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                      {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title text-dark fw-bold">{{ guide.title }}</h5>
+                        <div class="component-info">
+                          <p class="card-text text-dark mb-2">
+                            <i class="bi bi-cpu text-primary me-2"></i><strong>CPU:</strong> {{ guide.cpu|truncatechars:30 }}
+                          </p>
+                          <p class="card-text text-dark mb-0">
+                            <i class="bi bi-gpu-card text-primary me-2"></i><strong>GPU:</strong> {{ guide.gpu|truncatechars:30 }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#guidesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#guidesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+
+        <!-- Indicators -->
+        <div class="text-center mt-3">
+          <div class="carousel-indicators position-static mx-auto">
+            {% for guide in guides %}
+              <button
+                type="button"
+                data-bs-target="#guidesCarousel"
+                data-bs-slide-to="{{ forloop.counter0 }}"
+                {% if forloop.first %}class="active"{% endif %}
+                aria-label="Slide {{ forloop.counter }}"
+                style="width: 10px; height: 10px; border-radius: 50%; margin: 0 5px; background-color: rgba(255,255,255,0.5); border: none;">
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!-- guides part end here -->
+    
+<!-- Blog Highlights Section -->
+<section class="blog-section mb-5 pb-4">
+  <div class="container">
+    <div class="row gx-4 align-items-start">
+      
+      <!-- Left Text Section -->
+      <div class="col-md-3 mb-4">
+        <div class="mb-3">
+          <i class="bi bi-newspaper" style="font-size: 2.5rem; color: #6a11cb;"></i>
+        </div>
+        <h1 style="color: #2c3e50; font-weight: 700;">Trending on BuildHub</h1>
+        <p style="color: #555; line-height: 1.8;">
+          Explore the most appreciated blogs shared by our enthusiastic community.
+          Check out the top-rated posts based on user likes.
+        </p>
+        <a href="{% url 'blog' %}" class="btn btn-gradient-secondary btn-lg shadow-sm">
+          <i class="bi bi-arrow-right-circle me-2"></i>Visit BuildHub
+        </a>
+      </div>
+
+
+      <!-- Right Card Section -->
+      <div class="col-md-9 position-relative">
+        <div class="row g-4">
+          {% for blog in top_blogs %}
+          <div class="col-md-6 col-lg-4 {% if not forloop.first %}pt-2{% endif %}">
+            <div class="card blog-card shadow-lg {% if forloop.first %}border border-3 border-warning{% endif %}" 
+                 style="{% if forloop.first %}transform: scale(1.02); transition: transform 0.3s ease;{% endif %}">
+              {% if forloop.first %}
+              <div class="top-pick-badge bg-warning text-dark">
+                <i class="bi bi-star-fill me-1"></i> Top Pick
+              </div>
+              {% endif %}
+
+
+              {% if blog.display_image %}
+              <img src="{{ blog.display_image.url }}" class="card-img-top" 
+                   alt="{{ blog.title }}" style="height: 180px; object-fit: cover;">
+              {% endif %}
+
+
+              <div class="card-body">
+                <h5 class="card-title fw-bold">{{ blog.title|truncatechars:40 }}</h5>
+                <p class="card-text text-muted small mb-1">
+                  <i class="bi bi-person-circle me-1"></i>By {{ blog.author.username }}
+                </p>
+                <p class="card-text text-muted small mb-1">
+                  <i class="bi bi-calendar-event me-1"></i> {{ blog.created|date:"F j, Y" }}
+                </p>
+                <p class="card-text small mb-2 d-flex justify-content-between">
+                  <span>
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <span class="badge bg-primary ms-1">{{ blog.likes.count }}</span>
+                  </span>
+                  <span>
+                    <i class="fa-regular fa-comments"></i>
+                    <span class="badge bg-secondary ms-1">{{ blog.comment_set.count }}</span>
+                  </span>
+                </p>
+
+
+                <a href="{% url 'blog_details' blog.id %}" class="btn btn-outline-primary w-100">
+                  <i class="bi bi-book-half me-1"></i>Read More
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.getElementById('guidesCarousel');
+  carousel.addEventListener('slid.bs.carousel', function (event) {
+    const indicators = document.querySelectorAll('.carousel-indicators button');
+    indicators.forEach((indicator, index) => {
+      if (index === event.to) {
+        indicator.classList.add('active');
+        indicator.style.backgroundColor = 'white';
+      } else {
+        indicator.classList.remove('active');
+        indicator.style.backgroundColor = 'rgba(255,255,255,0.5)';
+      }
+    });
+  });
+});
+</script>
+
+<style>
+  /* === FIX 1: Top Utility Bar Button Styling === */
+  .bg-dark .btn-sm {
+    padding: 6px 16px !important;
+    font-size: 0.875rem !important;
+    border-width: 1px !important;
+    border-radius: 6px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+  }
+
+  .bg-dark .btn-outline-light {
+    border: 1px solid rgba(255,255,255,0.8) !important;
+    color: #fff !important;
+    background-color: transparent !important;
+  }
+
+  .bg-dark .btn-outline-light:hover {
+    background-color: rgba(255,255,255,0.15) !important;
+    border-color: #fff !important;
+    color: #fff !important;
+  }
+
+  .bg-dark .btn-light {
+    background-color: #f8f9fa !important;
+    border: 1px solid #f8f9fa !important;
+    color: #212529 !important;
+  }
+
+  .bg-dark .btn-light:hover {
+    background-color: #e2e6ea !important;
+    border-color: #dae0e5 !important;
+    color: #212529 !important;
+  }
+
+  .bg-dark .me-2 {
+    margin-right: 8px !important;
+  }
+
+  /* Navbar Nav Link Styling */
+  .navbar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .navbar-nav .nav-item {
+    margin: 0 5px;
+  }
+
+  .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Search Form Styling */
+  .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+
+  .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1);
+  }
+
+  .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Autocomplete dropdown tweaks */
+  #product-autocomplete .list-group-item { 
+    cursor: pointer; 
+  }
+  
+  #product-autocomplete .small { 
+    font-size: 11px; 
+  }
+  
+  @media (max-width: 576px){
+    #product-autocomplete{
+      width:calc(100vw - 40px);
+      right:unset;
+      left:8px;
+    }
+  }
+</style>
+
+
+
+{% endblock %}

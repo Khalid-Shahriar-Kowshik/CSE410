@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="storage-page-wrapper" style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); padding: 40px 0 0 0;">
+    <div class="container" style="padding-bottom: 40px;">
+        <div class="row g-4">
+            <!-- Enhanced Components Navigation -->
+            <div class="col-md-3">
+                <div class="components-nav-card">
+                    <div class="card border-0 shadow-lg" style="border-radius: 15px; background: rgba(255,255,255,0.95); overflow: hidden;">
+                        <div class="card-header text-white text-center py-3" style="background: linear-gradient(135deg, #a78bfa 0%, #7dd3fc 100%); box-shadow: 0 2px 8px rgba(139,92,246,0.15);">
+                            <i class="fas fa-microchip fa-2x mb-2"></i>
+                            <h5 class="mb-0 fw-bold">Components</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'cpu' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-cpu me-2"></i> CPUs
+                                </a>
+                                <a href="{% url 'gpu' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-gpu-card me-2"></i> GPUs
+                                </a>
+                                <a href="{% url 'psu' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-plug me-2"></i> PSUs
+                                </a>
+                                <a href="{% url 'cpucooler' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-fan me-2"></i> CPU Coolers
+                                </a>
+                                <a href="{% url 'storage' %}" class="list-group-item list-group-item-action active-component">
+                                    <i class="bi bi-device-hdd me-2"></i> Storages
+                                </a>
+                                <a href="{% url 'ram' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-memory me-2"></i> RAM
+                                </a>
+                                <a href="{% url 'case' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-pc me-2"></i> Cases
+                                </a>
+                                <a href="{% url 'mobo' %}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-motherboard me-2"></i> Motherboards
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Display Section -->
+            <div class="col-md-9">
+                <!-- Header Card -->
+                <div class="card border-0 shadow-lg mb-4" style="border-radius: 15px; background: rgba(255,255,255,0.95);">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div>
+                                <h2 class="mb-1 fw-bold" style="color: #374151;">
+                                    <i class="bi bi-device-hdd text-primary me-2"></i>Storages
+                                </h2>
+                                <p class="text-muted mb-0">Browse the selection of storage drives</p>
+                            </div>
+                            <div class="sort-dropdown mt-3 mt-md-0">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-primary dropdown-toggle px-4" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-sort-down me-2"></i>
+                                        {% if current_sort == 'price_low' %}Price: Low to High
+                                        {% elif current_sort == 'price_high' %}Price: High to Low
+                                        {% elif current_sort == 'name_asc' %}Name: A to Z
+                                        {% elif current_sort == 'name_desc' %}Name: Z to A
+                                        {% else %}Sort By
+                                        {% endif %}
+                                    </button>
+                                    <ul class="dropdown-menu shadow" aria-labelledby="sortDropdown">
+                                        <li><a class="dropdown-item {% if current_sort == 'default' %}active{% endif %}" href="?sort=default">
+                                            <i class="bi bi-arrow-clockwise me-2"></i>Default
+                                        </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item {% if current_sort == 'price_low' %}active{% endif %}" href="?sort=price_low">
+                                            <i class="bi bi-sort-numeric-down me-2"></i>Price: Low to High
+                                        </a></li>
+                                        <li><a class="dropdown-item {% if current_sort == 'price_high' %}active{% endif %}" href="?sort=price_high">
+                                            <i class="bi bi-sort-numeric-up me-2"></i>Price: High to Low
+                                        </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item {% if current_sort == 'name_asc' %}active{% endif %}" href="?sort=name_asc">
+                                            <i class="bi bi-sort-alpha-down me-2"></i>Name: A to Z
+                                        </a></li>
+                                        <li><a class="dropdown-item {% if current_sort == 'name_desc' %}active{% endif %}" href="?sort=name_desc">
+                                            <i class="bi bi-sort-alpha-up me-2"></i>Name: Z to A
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="row g-4">
+                    {% for item in storage %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card card h-100 border-0 shadow-lg" style="border-radius: 15px; background: linear-gradient(145deg, #fafbfc, #f0f1f3); overflow: hidden; transition: all 0.3s ease;">
+                                <img src="{{ item.photo.url }}" alt="{{ item.name }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="card-title fw-bold mb-2" style="color: #374151;">{{ item.name|truncatechars:40 }}</h5>
+                                    <p class="card-text text-muted small mb-2">
+                                        <i class="bi bi-shop me-1"></i>{{ item.shop }}
+                                    </p>
+                                    <div class="price-tag mb-3">
+                                        <h4 class="mb-0 fw-bold" style="color: #8b5cf6;">৳{{ item.price }}</h4>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <a href="{% url 'storage_detail' item.id %}" class="btn btn-outline-primary">
+                                            <i class="bi bi-info-circle me-2"></i>View Details
+                                        </a>
+                                        <a href="{% url 'add_to_cart' 'Storage' item.id %}" class="btn btn-primary" style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); border: none;">
+                                            <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-12">
+                            <div class="card border-0 shadow-lg" style="border-radius: 15px; background: rgba(255,255,255,0.95);">
+                                <div class="card-body text-center py-5">
+                                    <i class="bi bi-inbox fa-3x text-muted mb-3"></i>
+                                    <h4 class="text-muted">No Storage Drives Found</h4>
+                                    <p class="text-muted">Please check back later or browse other components</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Component Navigation Styling */
+.components-nav-card .list-group-item {
+    border: none;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+    color: #374151;
+    font-weight: 500;
+}
+
+.components-nav-card .list-group-item:hover {
+    background-color: rgba(139,92,246,0.1);
+    padding-left: 30px;
+    color: #8b5cf6;
+}
+
+.components-nav-card .list-group-item.active-component {
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.components-nav-card .list-group-item i {
+    font-size: 1.1rem;
+}
+
+/* Product Card Styling */
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
+
+.product-card .card-img-top {
+    transition: all 0.3s ease;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+.dropdown-item {
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(139,92,246,0.1);
+    color: #8b5cf6;
+    padding-left: 20px;
+}
+
+.dropdown-item.active {
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+    color: white;
+}
+
+.dropdown-item i {
+    opacity: 0.7;
+}
+
+/* Button Styling */
+.btn-outline-primary {
+    border: 2px solid #8b5cf6;
+    color: #8b5cf6;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%);
+    border-color: #8b5cf6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(139,92,246,0.25);
+}
+
+.btn-primary {
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(139,92,246,0.3);
+}
+
+/* Badge Styling */
+.badge {
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .storage-page-wrapper {
+        padding: 20px 0 0 0 !important;
+    }
+    
+    .container {
+        padding-bottom: 20px !important;
+    }
+    
+    .components-nav-card {
+        margin-bottom: 20px;
+    }
+}
+</style>
+
+{% endblock %}

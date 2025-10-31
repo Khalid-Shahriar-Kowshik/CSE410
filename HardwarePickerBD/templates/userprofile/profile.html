@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+<div class="profile-page-wrapper" style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); padding: 40px 0 0 0;">
+    <div class="container" style="padding-bottom: 40px; max-width: 1200px;">
+        
+        <!-- Profile Header Card -->
+        <div class="card border-0 shadow-lg mb-4" style="border-radius: 15px; background: rgba(255,255,255,0.95);">
+            <div class="card-body p-4">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        {% if user.userprofile.image %}
+                        <img src="{{ user.userprofile.image.url }}" alt="{{ user.username }} avatar" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #8b5cf6;">
+                        {% else %}
+                        <img src="{% static 'image/logo.png' %}" alt="default avatar" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #8b5cf6;">
+                        {% endif %}
+                    </div>
+                    <div class="profile-meta" style="flex: 1; margin-left: 30px;">
+                        <h2 style="color: #374151; font-weight: 700; margin-bottom: 15px;">{{ user.username }}</h2>
+                        <div class="profile-stats" style="display: flex; gap: 30px; margin-bottom: 15px;">
+                            <div style="color: #6b7280;"><b style="color: #374151;">{{ user.blogpost_set.count }}</b> posts</div>
+                        </div>
+
+                        <div class="profile-bio" style="margin-bottom: 15px; color: #374151;">
+                            {% if user.userprofile.first_name or user.userprofile.last_name %}
+                            <div style="margin-bottom: 5px;"><b>{{ user.userprofile.first_name }} {{ user.userprofile.last_name }}</b></div>
+                            {% endif %}
+                            {% if user.userprofile.bio %}
+                            <div style="margin-bottom: 5px;">{{ user.userprofile.bio }}</div>
+                            {% endif %}
+                            <div style="color: #6b7280;">{{ user.email }}</div>
+                        </div>
+
+                        <div class="profile-actions" style="display: flex; gap: 10px;">
+                            <a href="{% url 'edit_profile' %}" class="btn px-4 py-2" style="background: linear-gradient(135deg, #8b5cf6 0%, #60a5fa 100%); border: none; color: white; font-weight: 600; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
+                                <i class="bi bi-pencil me-2"></i>Edit Profile
+                            </a>
+                            <a href="{% url 'order_list' %}" class="btn btn-outline-secondary px-4 py-2" style="border: 2px solid #8b5cf6; color: #8b5cf6; font-weight: 600; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
+                                <i class="bi bi-pc-display me-2"></i>My Builds
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Section -->
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: white; font-weight: 700; margin-bottom: 0;">Posts:</h4>
+        </div>
+
+        <!-- Posts grid (no border) -->
+        <div class="posts-grid">
+            {% for post in user.blogpost_set.all reversed %}
+            <a href="{% url 'blog_details' post.id %}" class="post-item">
+                <div class="post-thumbnail">
+                    {% if post.display_image %}
+                    <img src="{{ post.display_image.url }}" alt="{{ post.title }}">
+                    {% else %}
+                    <img src="{% static 'image/logo.png' %}" alt="no image">
+                    {% endif %}
+                    <div class="overlay">
+                        <span><i class="bi bi-heart-fill me-1"></i>{{ post.likes.count }}</span>
+                    </div>
+                </div>
+                <div class="post-title">
+                    {{ post.title|truncatechars:40 }}
+                </div>
+            </a>
+            {% empty %}
+            <div class="empty-state">
+                <div class="card border-0 shadow-lg" style="border-radius: 15px; background: rgba(255,255,255,0.95);">
+                    <div class="card-body text-center py-5">
+                        <i class="bi bi-inbox" style="font-size: 3rem; color: #9ca3af;"></i>
+                        <p style="color: #6b7280; margin-top: 15px; margin-bottom: 0;">No posts yet — start writing!</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: start;
+    gap: 30px;
+}
+
+/* Posts Grid - Smaller, smarter layout */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.post-item {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.post-item:hover {
+    transform: translateY(-8px);
+}
+
+.post-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.post-item:hover .post-thumbnail {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.post-item:hover .post-thumbnail img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.post-item:hover .overlay {
+    opacity: 1;
+}
+
+.post-title {
+    margin-top: 12px;
+    font-weight: 600;
+    color: white;
+    font-size: 0.95rem;
+    text-align: center;
+    line-height: 1.4;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    padding: 0 5px;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+}
+
+/* Button Hover Effects */
+.profile-actions a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139,92,246,0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-page-wrapper {
+        padding: 20px 0 0 0 !important;
+    }
+
+    .container {
+        padding-bottom: 20px !important;
+        max-width: 100% !important;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-meta {
+        margin-left: 0 !important;
+        margin-top: 20px;
+    }
+
+    .profile-stats {
+        justify-content: center;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-actions a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+</style>
+
+{% endblock %}

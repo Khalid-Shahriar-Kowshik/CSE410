@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3>Search results for "{{ query }}"</h3>
+  <hr>
+  {% if query and results %}
+    <div class="list-group">
+      {% for obj, type_name, url_name in results %}
+        <a href="{% url url_name obj.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ obj.name }}</strong>
+            <div class="text-muted">{{ type_name }}</div>
+          </div>
+          <div class="text-muted">৳ {{ obj.price }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  {% elif query and not results %}
+    <div class="alert alert-warning">No products found for "{{ query }}".</div>
+  {% else %}
+    <div class="alert alert-secondary">Enter a search term above to find products.</div>
+  {% endif %}
+</div>
+{% endblock %}

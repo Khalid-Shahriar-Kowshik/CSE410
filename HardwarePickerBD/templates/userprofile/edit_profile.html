@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Edit Profile</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First Name</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    {{ form.last_name }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    {{ form.phone_number }}
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    {{ form.address }}
+                </div>
+                <div class="mb-3">
+                    <label for="date_of_birth" class="form-label">Date of Birth</label>
+                    {{ form.date_of_birth }}
+                </div>
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    {{ form.bio }}
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Profile Picture</label>
+                    
+                    <!-- Current image display -->
+                    {% if form.instance.image %}
+                    <div class="current-image mb-2">
+                        <span class="d-block mb-1">Current:</span>
+                        <img src="{{ form.instance.image.url }}" alt="Current profile" class="img-thumbnail" style="max-width: 150px;">
+                    </div>
+                    {% endif %}
+                    
+                    <!-- File input -->
+                    <div class="file-input-container mb-2">
+                        <input type="file" name="image" accept="image/*" class="form-control" id="id_image">
+                    </div>
+                    
+                    <!-- Clear checkbox - only show if image exists -->
+                    {% if form.instance.image %}
+                    <div class="clear-checkbox-container">
+                        <input type="checkbox" name="image-clear" id="image-clear_id" class="form-check-input">
+                        <label for="image-clear_id" class="form-check-label">Remove current image</label>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Apply consistent styling to all inputs */
+    form input:not([type="file"]):not([type="checkbox"]), 
+    form textarea, 
+    form select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+        height: 45px;
+    }
+
+    form textarea {
+        height: auto;
+        min-height: 100px;
+        resize: vertical;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* File input styling */
+    .file-input-container input[type="file"] {
+        padding: 8px;
+        height: auto;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background-color: white;
+        width: 100%;
+    }
+
+    /* File input button styling */
+    .file-input-container input[type="file"]::file-selector-button {
+        padding: 6px 12px;
+        background: #e9ecef;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    /* Clear checkbox styling */
+    .clear-checkbox-container {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .clear-checkbox-container input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+    }
+
+    .clear-checkbox-container label {
+        margin: 0;
+        font-size: 14px;
+        cursor: pointer;
+        color: #495057;
+    }
+
+    /* Focus styles */
+    form input:focus, 
+    form textarea:focus,
+    .file-input-container input[type="file"]:focus {
+        outline: none;
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+    }
+
+    /* Date picker styling */
+    form input[type="date"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: white;
+        padding: 10px 12px;
+    }
+
+    /* Current image styling */
+    .current-image span {
+        font-size: 14px;
+        color: #6c757d;
+    }
+</style>
+{% endblock %}

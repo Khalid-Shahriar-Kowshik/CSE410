@@ -1,0 +1,76 @@
+{% load static %}
+<body class="d-flex flex-column min-vh-100">
+<footer class="footer mt-auto bg-dark text-light">
+ <section class="lastpart">
+ <div class="container">
+ <div class="details" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; padding: 30px 0;">
+
+
+<!-- Site Logo and Name -->
+<div class="name col-mb-2" style="flex: 1 1 200px; text-align: center;">
+<img src="{% static 'image/logo.png' %}" alt="Logo" style="height: 60px; width: auto; margin-bottom: 10px;">
+<h6 style="font-size: 18px; margin: 0;">HardwarePickerBD</h6>
+ </div>
+
+
+<!-- Features Column -->
+<div class="pro col-mb-5" style="flex: 1 1 200px;">
+ <h6 style="position: relative; display: inline-block; margin-bottom: 15px;">
+Features
+ <span style="display: block; height: 3px; width: 100%; background-color: #1976d2; box-shadow: 0 2px 5px #1976d2; border-radius: 2px; margin-top: 4px;"></span>
+ </h6>
+<div class="row" style="margin: 0 -5px;">
+ <div class="col-6" style="padding: 0 5px;">
+<a href="{% url 'cpu' %}" class="text-light text-decoration-none hover-underline d-block mb-2">Builder</a>
+ </div>
+<div class="col-6" style="padding: 0 5px;">
+<a href="{% url 'guide_list' %}" class="text-light text-decoration-none hover-underline d-block mb-2">Guides</a>
+</div>
+ <div class="col-6" style="padding: 0 5px;">
+ <a href="{% url 'blog' %}" class="text-light text-decoration-none hover-underline d-block mb-2">BuildHub</a>
+ </div>
+ <div class="col-6" style="padding: 0 5px;">
+<a href="{% url 'cart_view' %}" class="text-light text-decoration-none hover-underline d-block mb-2">Cart</a>
+ </div>
+</div>
+ </div>
+
+
+<!-- Account Column -->
+ <div class="account col-mb-5" style="flex: 1 1 200px;">
+ <h6 style="position: relative; display: inline-block; margin-bottom: 10px;">
+ Account
+ <span style="display: block; height: 3px; width: 100%; background-color: #1976d2; box-shadow: 0 2px 5px #1976d2; border-radius: 2px; margin-top: 4px;"></span>
+ </h6>
+<p><a href="{% url 'register' %}" class="text-light text-decoration-none hover-underline">Register</a></p>
+ <p><a href="{% url 'login' %}" class="text-light text-decoration-none hover-underline">Login</a></p>
+ </div>
+
+
+ </div>
+ </div>
+ </section>
+
+
+ <!-- Updated Copyright Section - Matches Top Utility Bar -->
+<div class="copy text-center py-2" style="color: rgb(246, 239, 239); background-color: #212529;">
+ <p style="margin: 0; font-size: 14px; line-height: 1.5;">©<a class="text-light text-decoration-none hover-underline"> Samir , Rakib , Kowshik </a>| 2025</p>
+ </div>
+</footer>
+
+
+<!-- Inline hover style -->
+<style>
+ .hover-underline:hover {
+color: #ffffff;
+ text-decoration: underline;
+ text-decoration-color: #1976d2;
+ text-underline-offset: 4px;
+ }
+ 
+ /* Ensure footer link styling */
+ .copy a:hover {
+ opacity: 0.8;
+ }
+</style>
+</body>

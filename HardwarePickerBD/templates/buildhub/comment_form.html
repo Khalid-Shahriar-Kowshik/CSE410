@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <!-- Page Title -->
+    <h1 class="mb-4 text-center text-primary" style="font-weight: 700;">Add a Comment</h1>
+
+    <!-- Add Comment Form -->
+    <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </form>
+    </div>
+
+    <!-- Back to Blog Button -->
+    <div class="text-center mt-3">
+        <a href="{% url 'blog_details' blog.id %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Blog
+        </a>
+    </div>
+</div>
+
+{% endblock %}

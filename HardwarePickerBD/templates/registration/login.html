@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+<body style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);">
+    <section class="d-flex align-items-center justify-content-center min-vh-100 py-5">
+        <div class="container p-4 shadow-lg rounded bg-white" style="max-width: 420px; border-radius: 12px;">
+            <!-- Logo and Title -->
+            <div class="text-center mb-4">
+                <div class="mb-3">
+                    <i class="fas fa-lock" style="font-size: 2.5rem; color: #0d6efd;"></i>
+                </div>
+                <h3 class="mb-1" style="color: #333; font-weight: 600;">Login to HardwarePickerBD</h3>
+                <p class="text-muted">Enter your credentials to continue</p>
+            </div>
+
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+
+                <!-- Username Field -->
+                <div class="mb-3">
+                    <label for="username" class="form-label fw-medium">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter your username"
+                            id="username"
+                            name="username"
+                            required
+                            autocomplete="username">
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-4">
+                    <label for="password" class="form-label fw-medium">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input
+                            type="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            id="password"
+                            name="password"
+                            required
+                            autocomplete="current-password">
+                    </div>
+                </div>
+
+                <!-- Login Button -->
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg fw-bold py-2">
+                        <i class="fas fa-sign-in-alt me-2"></i>Log In
+                    </button>
+                </div>
+
+                <!-- Social Links -->
+                <div class="text-center mt-4 pt-2 border-top">
+                    <p class="mb-2">Don't have an account?
+                        <a href="{% url 'register' %}" class="text-decoration-none fw-medium">Sign Up</a>
+                    </p>
+                    <!-- <p class="mb-0">
+                        <a href="#" class="text-decoration-none text-muted small">Forgot password?</a>
+                    </p> -->
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+<style>
+    /* Enhanced form styling */
+    .form-control {
+        border: 1px solid #ced4da;
+        background-color: #ffffff;
+        color: #212529; /* Dark text for visibility */
+        padding: 12px 15px;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+        background-color: #ffffff;
+        color: #212529; /* Maintain dark text when focused */
+    }
+
+    .form-control::placeholder {
+        color: #6c757d; /* Medium gray placeholder */
+    }
+
+    .input-group-text {
+        background-color: #e9ecef;
+        border: 1px solid #ced4da;
+        color: #495057;
+    }
+
+    .input-group > .form-control:focus + .input-group-text {
+        border-color: #86b7fe;
+        background-color: #e9ecef;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #0d6efd, #0b5ed7);
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+    }
+</style>
+{% endblock %}
